@@ -21,8 +21,8 @@ This project is an advanced **Academic Placement Dashboard** designed to bridge 
 - **Database:** SQLite
 
 ## Project Architecture
-Gemini_Generated_Image_h620nh620nh620nh.png
-Gemini_Generated_Image_1bu28l1bu28l1bu2.png
+![Architecture](Gemini_Generated_Image_h620nh620nh620nh.png)
+![Architecture](Gemini_Generated_Image_1bu28l1bu28l1bu2.png)
 ## Installation & Usage
 1. Clone this repository: `git clone https://github.com/hemavelusamy/Academic_Placement_Dashboard.git`
 2. Install dependencies: `pip install -r requirements.txt`
