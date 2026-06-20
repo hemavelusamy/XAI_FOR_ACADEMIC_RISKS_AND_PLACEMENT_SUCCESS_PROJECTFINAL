@@ -17,9 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from core_app import views
+from django.shortcuts import redirect
+def home_view(request):
+    return redirect('login')
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/',admin.site.urls),
+    path('',home_view,name='home'),
     path('login/', views.login_view, name='login'),
     path('dashboard/',views.dashboard_view,name='dashboard'),
+    path('register/',views.register_view,name='register'),
 ]
