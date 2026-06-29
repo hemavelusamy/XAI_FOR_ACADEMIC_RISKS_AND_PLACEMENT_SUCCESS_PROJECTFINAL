@@ -12,17 +12,33 @@ def login_view(request):
 
 def dashboard_view(request):
     prediction = None
+    reason= None
     if request.method == 'POST':
         try:
-            cgpa = float(request.POST.get('cgpa'))
-            attendance = int(request.POST.get('attendance'))
-            # Model prediction
+            cgpa = float(request.POST.get('cgpa')or 0)
+            attendance = int(request.POST.get('attendance')or 0)
+            projects = int(request.POST.get('projects')or 0)
+            internship = int(request.POST.get('internship')or 0)
+            comm_score = int(request.POST.get('comm_score')or 0)
             result = model.predict([[cgpa, attendance]])
-            prediction = "Placed" if result[0] == 1 else "Not Placed"
-        except (ValueError, TypeError):
-            prediction = "Invalid Input"
+
+            if result[0]==1:
+                prediction="Placed"
+                reason = "Strong profile with academic excellence and practical experience."
+            else:
+                prediction="Not placed"
+                reason = "Reason: "
+                if cgpa <6.0: reason +="need to improve cgpa."
+                if projects ==0: reason +="Start working on technical projects."
+                if internship ==0: reason +="Try to do an internship."
+                if comm_score<6: reason +="Improve your communication skill"
+        
+        except Exception as e:
+            print("Error:",e)
+            prediction = "Processing Error"
+            reason = "Ensure all inputs are numbers"
             
-    return render(request, 'core_app/dashboard.html', {'prediction': prediction})
+    return render(request, 'core_app/dashboard.html', {'prediction': prediction,'reason': reason})
     # Mela irukura ellam code-ukkum appuram, kadasila ithai copy panni paste pannunga
 
 from django.contrib.auth.forms import UserCreationForm
